@@ -25,14 +25,31 @@ var library = {
 
 // FUNCTIONS TO IMPLEMENT:
 
+
+  // for (playlist in library.playlists) {
+
+
+  // }
+
+
 // prints a list of all playlists, in the form:
 // p01: Coding Music - 2 tracks
 // p02: Other Playlist - 1 tracks
 
 var printPlaylists = function () {
 
+  for (playlist in library.playlists) {
+
+    let pid = library["playlists"]["id"];
+    let name = library["playlists"]["name"];
+    let N = Object.keys(library["playlists"]).length;
+
+    console.log(pid + ":" + name + " - " + N + " tracks");
+  }
+
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // prints a list of all tracks, in the form:
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
@@ -40,6 +57,13 @@ var printPlaylists = function () {
 // t03: Four Thirty-Three by John Cage (Woodstock 1952)
 
 var printTracks = function () {
+
+ //Works for upto 9 tracks
+  for (var i = 1; i <= Object.keys(library["playlists"]).length; i++){
+
+  console.log(library["playlists"]["p0"+i]["id"] + ":" + library["playlists"]["p0"+i]["name"] + " - " + Object.keys(library["playlists"]).length + "tracks");
+
+  }
 
 }
 
@@ -49,7 +73,11 @@ var printTracks = function () {
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 
+// Input: playlistId
+
 var printPlaylist = function (playlistId) {
+
+
 
 }
 
@@ -86,7 +114,7 @@ var addPlaylist = function (name) {
 // STRETCH:
 // given a query string string, prints a list of tracks
 // where the name, artist or album contains the query string (case insensitive)
-// tip: use "string".search("tri") 
+// tip: use "string".search("tri")
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search
 
 var printSearchResults = function(query) {
