@@ -73,6 +73,8 @@ var library = {
 library.printPlaylists();
 library.printPlaylistAndTracks('p01');
 library.addTrackToPlaylist("t01","p02");
+library.printTrack('t01');
+library.printTracks();
 console.log(library.uid);
 library.addTrack("Homemade Dynamite (Digital Fabric Remix)","Lorde","Melodrama [Deluxe]");
 library.addPlaylist();
@@ -87,7 +89,13 @@ console.log(library.playlists);
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search
 
 var printSearchResults = function(query) {
-
+    qSTR = new RegExp(query, 'i')
+    for (uid in library.tracks){
+        var track = library.tracks[uid]
+        if (qSTR.test(track.name) || qSTR.test(track.artist) || qSTR.test(track.album)){
+            return library.printTrack(uid)
+        }
+    }
 }
 
-
+printSearchResults('Homemade');
