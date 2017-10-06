@@ -1,116 +1,124 @@
 var library = {
-  tracks: { t01: { id: "t01",
-                   name: "Code Monkey",
-                   artist: "Jonathan Coulton",
-                   album: "Thing a Week Three" },
-            t02: { id: "t02",
-                   name: "Model View Controller",
-                   artist: "James Dempsey",
-                   album: "WWDC 2003"},
-            t03: { id: "t03",
-                   name: "Four Thirty-Three",
-                   artist: "John Cage",
-                   album: "Woodstock 1952"}
-          },
-  playlists: { p01: { id: "p01",
-                      name: "Coding Music",
-                      tracks: ["t01", "t02"]
-                    },
-               p02: { id: "p02",
-                      name: "Other Playlist",
-                      tracks: ["t03"]
-                    }
-             }
+    tracks: { t01: { id: "t01",
+        name: "Code Monkey",
+        artist: "Jonathan Coulton",
+        album: "Thing a Week Three" },
+        t02: { id: "t02",
+            name: "Model View Controller",
+            artist: "James Dempsey",
+            album: "WWDC 2003"},
+        t03: { id: "t03",
+            name: "Four Thirty-Three",
+            artist: "John Cage",
+            album: "Woodstock 1952"}
+    },
+    playlists: { p01: { id: "p01",
+        name: "Coding Music",
+        tracks: ["t01", "t02"]
+    },
+        p02: { id: "p02",
+            name: "Other Playlist",
+            tracks: ["t03"]
+        }
+    }
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// prints a list of all playlists, in the form:
-// p01: Coding Music - 2 tracks
-// p02: Other Playlist - 1 tracks
-
-var printPlaylists = function () {
-
-  for (pid in library.playlists) {
-
-    plid = library.playlists[pid].id;
-    name = library.playlists[pid].name
-    N = library.playlists[pid].tracks.length;
-
-    console.log(plid + ":" + name + " - " + N + " tracks.");
-  }
-
+// Print tracks
+var printTracks = function(){
+    for (var track in library.tracks){
+     printTrack(track);
+    }
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+console.log("========================================================")
 
-// prints a list of all tracks, in the form:
-// t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
-// t02: Model View Controller by James Dempsey (WWDC 2003)
-// t03: Four Thirty-Three by John Cage (Woodstock 1952)
+// Print track (input = trackId)
+var printTrack = function (trackId) {
+    var trackObj = library.tracks[trackId];
+    console.log(trackObj.id + ': ' + trackObj.name + ' by ' + trackObj.artist + ' (' + trackObj.album + ')');
+}
+printTracks(library)
 
-var printTracks = function () {
+console.log("========================================================")
 
-  for (pid in library.tracks) {
-    N = library.tracks[pid].id;
-    name = library.tracks[pid].name;
-    artist = library.tracks[pid].artist;
-    album = library.tracks[pid].album;
-    console.log(N + ": " + name + " by " + artist + " (" + album + ")")
-  }
+
+// Print playlists
+var printPlaylists = function(){
+    for (var playlist in library.playlists) {
+        printPlaylist(playlist);
+    }
 }
 
-
-// prints a list of tracks for a given playlist, in the form:
-// p01: Coding Music - 2 tracks
-// t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
-// t02: Model View Controller by James Dempsey (WWDC 2003)
-
-// Input: playlistId
-
+// Print playlist (input = playlistId)
 var printPlaylist = function (playlistId) {
+    var playlistObj = library.playlists[playlistId];
+    console.log(playlistObj.id + ': ' + playlistObj.name + ' - ' + playlistObj.tracks.length + ' tracks');
+}
+printPlaylists(library);
 
+console.log("========================================================")
+
+
+// Print playlist and tracks
+var printPlaylistAndTracks = function (playlistId) {
+    printPlaylist(playlistId);
+    var playlistObj = library.playlists[playlistId];
+        for (var i=0; i < playlistObj.tracks.length; i++){
+            printTrack(playlistObj.tracks[i]);
+        }
 
 
 }
+printPlaylistAndTracks('p01');
+
+console.log("========================================================")
 
 // adds an existing track to an existing playlist
-
 var addTrackToPlaylist = function (trackId, playlistId) {
 
-  library.playlists[playlistId].tracks.push(trackId);
-  console.log(library.playlists[playlistId].tracks)
+    library.playlists[playlistId].tracks.push(trackId);
+    console.log(library.playlists[playlistId].tracks)
 
 }
+addTrackToPlaylist("t01","p02");
 
+console.log("========================================================")
 
 // generates a unique id
 // (use this for addTrack and addPlaylist)
-
 var uid = function() {
-  return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 }
 
+console.log(uid);
+
+console.log("========================================================")
 
 // adds a track to the library
-
 var addTrack = function (name, artist, album) {
 
-  library.tracks[uid()] = {name: name, artist: artist, album: album};
-  console.log(library.tracks);
+    library.tracks[uid()] = {name: name, artist: artist, album: album};
+    console.log(library.tracks);
 
 }
 
+addTrack("Homemade Dynamite (Digital Fabric Remix)","Lorde","Melodrama [Deluxe]");
+
+console.log("========================================================")
 
 // adds a playlist to the library
-
 var addPlaylist = function (name) {
 
-  uid = uid();
-  library.playlists[uid] = {id: uid, name: name, tracks: ""};
-  console.log(library.playlists);
+    uid = uid();
+    library.playlists[uid] = {id: uid, name: name, tracks: ""};
+    console.log(library.playlists);
 
 }
+addPlaylist();
 
+console.log("========================================================")
+console.log(library.tracks);
+console.log(library.playlists);
 
 // STRETCH:
 // given a query string string, prints a list of tracks
@@ -121,3 +129,5 @@ var addPlaylist = function (name) {
 var printSearchResults = function(query) {
 
 }
+
+
