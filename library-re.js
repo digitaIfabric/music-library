@@ -68,6 +68,13 @@ var library = {
         console.log(this.playlists);
 
     },
+
+    // STRETCH:
+    // given a query string string, prints a list of tracks
+    // where the name, artist or album contains the query string (case insensitive)
+    // tip: use "string".search("tri")
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search
+
     printSearchResults: function(query) {
         var que = new RegExp(query, 'i');
         for (uid in this.tracks){
@@ -79,6 +86,8 @@ var library = {
     }
 
 }
+
+// ---------------- Outputs ---------------------
 
 library.printPlaylists();
 library.printPlaylistAndTracks('p01');
@@ -92,11 +101,5 @@ console.log(library.tracks);
 console.log(library.playlists);
 library.printSearchResults('Homemade');
 
-
-// STRETCH:
-// given a query string string, prints a list of tracks
-// where the name, artist or album contains the query string (case insensitive)
-// tip: use "string".search("tri")
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search
 
 
